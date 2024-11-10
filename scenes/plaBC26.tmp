@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvsk7fit27xnn"]
+
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_d8ssj"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_jirbt"]
+[ext_resource type="PackedScene" uid="uid://ort36gk57mxm" path="res://scenes/gun.tscn" id="3_5ac7u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7mjsj"]
+radius = 31.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pr0ap"]
+radius = 41.0122
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcyru"]
+bg_color = Color(1.86507e-07, 0.264621, 0.121667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ru8mq"]
+bg_color = Color(1.05888e-06, 0.845189, 0.347475, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_jirbt")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_d8ssj")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7mjsj")
+
+[node name="Gun" parent="." instance=ExtResource("3_5ac7u")]
+position = Vector2(0, -36)
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_pr0ap")
+debug_color = Color(0.995838, 0, 0.198054, 0.42)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -94.0
+offset_top = -134.0
+offset_right = 94.0
+offset_bottom = -106.0
+scale = Vector2(1.00492, 0.679029)
+theme_override_styles/background = SubResource("StyleBoxFlat_mcyru")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ru8mq")
+value = 100.0
+show_percentage = false
